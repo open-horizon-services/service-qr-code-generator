@@ -1,15 +1,14 @@
 FROM python:3.10-alpine
 
 # Update pip to use latest version
-WORKDIR /qr_code_generator
 RUN pip3 install --upgrade pip
-
-RUN pip3 install 
-COPY ./ setup.py / 
+ 
+COPY ./qr_code_generator /qr_code_generator
+WORKDIR /qr_code_generator 
 RUN python setup.py install
 
-COPY ./ qrcodegen.py /
 
-CMD ["python3" "qrcodegen.py"]
+CMD ["python3","qrcodegen.py"]
+
 
 
