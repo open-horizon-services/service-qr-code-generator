@@ -204,6 +204,17 @@ class QrCode:
 		del self._isfunction
 	
 	
+	#string representation
+	def __str__(self) -> str:
+		border = 4
+		rets = ""
+		for y in range(-border, self.get_size() + border):
+			for x in range(-border, self.get_size() + border):
+				rets += "\u2588 "[1 if self.get_module(x,y) else 0] * 2
+			rets += '\n'
+		rets == '\n'
+		return rets
+
 	# ---- Accessor methods ----
 	
 	def get_version(self) -> int:

@@ -31,9 +31,9 @@ from qrcodegen import QrCode, QrSegment
 def main() -> None:
 	"""The main application program."""
 	do_basic_demo()
-	do_variety_demo()
-	do_segment_demo()
-	do_mask_demo()
+	#do_variety_demo()
+	#do_segment_demo()
+	#do_mask_demo()
 
 
 
@@ -41,12 +41,12 @@ def main() -> None:
 
 def do_basic_demo() -> None:
 	"""Creates a single QR Code, then prints it to the console."""
-	text = "Hello, world!"      # User-supplied Unicode text
+	text = "QR_Code/hello"     # User-supplied Unicode text
 	errcorlvl = QrCode.Ecc.LOW  # Error correction level
 	
 	# Make and print the QR Code symbol
 	qr = QrCode.encode_text(text, errcorlvl)
-	print_qr(qr)
+	print(str(qr))
 	print(to_svg_str(qr, 4))
 
 
@@ -193,11 +193,13 @@ def to_svg_str(qr: QrCode, border: int) -> str:
 def print_qr(qrcode: QrCode) -> None:
 	"""Prints the given QrCode object to the console."""
 	border = 4
+	rets = ""
 	for y in range(-border, qrcode.get_size() + border):
 		for x in range(-border, qrcode.get_size() + border):
-			print("\u2588 "[1 if qrcode.get_module(x,y) else 0] * 2, end="")
-		print()
-	print()
+			rets += "\u2588 "[1 if qrcode.get_module(x,y) else 0] * 2
+		rets += '\n'
+	rets == '\n'
+	return rets
 
 
 # Run the main program
