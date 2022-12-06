@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+import ipaddress
 
 WEB_SERVER_BIND_ADDRESS = '0.0.0.0'
 WEB_SERVER_PORT = 8000
@@ -21,7 +22,10 @@ def hello():
     global ip
     parameters = request.args.copy()
     if 'ip' in parameters:
-        ip = parameters.get('ip')
+        try:
+            ip = ipaddress.ip_address(parameters.get('ip'))
+        except ValueError:
+            print("Error: Invalid IP Address")
 
     return template.format(arguments=parameters, ipaddr = ip)
 
